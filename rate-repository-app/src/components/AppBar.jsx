@@ -17,11 +17,10 @@ const styles = StyleSheet.create({
 const AppBar = () => {
   return (
     <View style={styles.container}>
-      {['Repositories'].map((tab) => (
-        <AppBarTab key={tab}>{tab}</AppBarTab>
-      ))}
+        <AppBarTab text="Repositories" linkTo="/" />
+        <AppBarTab text="Sign In" linkTo="/signin" />
     </View>
-  );
+  );  
 };
 
 export default AppBar;

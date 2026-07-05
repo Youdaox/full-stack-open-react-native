@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     padding: 10,
+    backgroundColor: 'white',
   },
   profileImage: {
     width: 50,
@@ -15,6 +16,7 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flexDirection: 'column',
+    maxWidth: '80%',
     gap: 5,
   },
   statsContainer: {
