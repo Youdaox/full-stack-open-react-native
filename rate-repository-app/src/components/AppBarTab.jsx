@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 const AppBarTab = ({ children, onPress }) => {
   return (
     <Pressable onPress={onPress} style={styles.tab}>
-      <Text fontWeight="bold" color="appBar" fontSize="subheading">
+      <Text fontWeight="bold" fontSize="subheading" color="appBar">
         {children}
       </Text>
     </Pressable>

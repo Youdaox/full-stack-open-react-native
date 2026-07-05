@@ -1,15 +1,77 @@
-import { View, Text } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
+import Text from './Text';
+import theme from '../theme';
+
+const styles = StyleSheet.create({
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    padding: 10,
+  },
+  profileImage: {
+    width: 50,
+    height: 50,
+    borderRadius: 5,
+  },
+  textContainer: {
+    flexDirection: 'column',
+    gap: 5,
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 50,
+    marginTop: 10,
+  },
+  statItem: {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+});
+
+const formatCount = (count) => {
+  if (count >= 1000) {
+    return (count / 1000).toFixed(1) + 'k';
+  }
+  return count.toString();
+};
 
 const RepositoryItem = ({ repository }) => {
   return (
-    <View>
-      <Text>{repository.fullName}</Text>
-      <Text>{repository.description}</Text>
-      <Text>{repository.language}</Text>
-      <Text>Forks: {repository.forksCount}</Text>
-      <Text>Stars: {repository.stargazersCount}</Text>
-      <Text>Rating: {repository.ratingAverage}</Text>
-      <Text>Reviews: {repository.reviewCount}</Text>
+    <View style={styles.container}>
+      <View style={{ flexDirection: 'row', gap: 20, padding: 10 }}>
+        <Image source={{ uri: repository.ownerAvatarUrl }} style={styles.profileImage} />
+        <View style={styles.textContainer}>
+          <Text fontWeight='bold' fontSize='subheading'>
+            {repository.fullName}
+          </Text>
+          <Text color='textSecondary' fontSize='subheading'>
+            {repository.description}
+          </Text>
+          <Text fontSize='subheading' style={{ backgroundColor: theme.colors.primary, borderRadius: 4, color: 'white', padding: 4, alignSelf: 'flex-start' }}>
+            {repository.language}
+          </Text>
+        </View>
+      </View>
+
+      <View style={styles.statsContainer}>
+        <View style={styles.statItem}>
+          <Text fontSize='subheading' fontWeight='bold'>{formatCount(repository.stargazersCount)}</Text>
+          <Text color='textSecondary'>Stars</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text fontSize='subheading' fontWeight='bold'>{formatCount(repository.forksCount)}</Text>
+          <Text color='textSecondary'>Forks</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text fontSize='subheading' fontWeight='bold'>{formatCount(repository.reviewCount)}</Text>
+          <Text color='textSecondary'>Reviews</Text>
+        </View>
+        <View style={styles.statItem}>
+          <Text fontSize='subheading' fontWeight='bold'>{formatCount(repository.ratingAverage)}</Text>
+          <Text color='textSecondary'>Rating</Text>
+        </View>
+      </View>
     </View>
   );
 }
