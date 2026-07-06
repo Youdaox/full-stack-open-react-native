@@ -52,11 +52,11 @@ const SignInForm = ({ onSubmit }) => {
           onBlur={formik.handleBlur('username')}
           style={[
             styles.textInput,
-            formik.touched.username && formik.errors.username ? { borderColor: 'red' } : null,
+            formik.touched.username && formik.errors.username ? { borderColor: theme.colors.error } : null,
           ]}
         />
         {formik.touched.username && formik.errors.username && (
-          <Text style={{ color: 'red' }}>{formik.errors.username}</Text>
+          <Text style={{ color: theme.colors.error }}>{formik.errors.username}</Text>
         )}
       </View>
 
@@ -68,12 +68,12 @@ const SignInForm = ({ onSubmit }) => {
           onBlur={formik.handleBlur('password')}
           style={[
             styles.textInput,
-            formik.touched.password && formik.errors.password ? { borderColor: 'red' } : null,
+            formik.touched.password && formik.errors.password ? { borderColor: theme.colors.error } : null,
           ]}
           secureTextEntry
         />
         {formik.touched.password && formik.errors.password && (
-          <Text style={{ color: 'red' }}>{formik.errors.password}</Text>
+          <Text style={{ color: theme.colors.error }}>{formik.errors.password}</Text>
         )}
       </View>
       <Pressable onPress={formik.handleSubmit} style={styles.button}>
