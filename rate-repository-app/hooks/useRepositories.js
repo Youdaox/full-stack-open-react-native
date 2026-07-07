@@ -8,7 +8,7 @@ const useRepositories = () => {
     setLoading(true);
 
     // Replace the IP address part with your own IP address!
-    const response = await fetch('http://192.168.1.96:5000/api/repositories');
+    const response = await fetch(process.env.EXPO_PUBLIC_REST_URI);
     const json = await response.json();
 
     setLoading(false);
