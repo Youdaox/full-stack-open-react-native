@@ -30,3 +30,11 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `;
+export const CHECK_SIGNED_IN = gql`
+  query {
+    me {
+      id
+      username
+    }
+  }
+`;

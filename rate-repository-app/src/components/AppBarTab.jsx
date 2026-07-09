@@ -7,16 +7,22 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-
-const AppBarTab = ({ text, linkTo }) => {
-  return (
-    <Pressable style={styles.tab}>
-      <Link to={linkTo}>
+const AppBarTab = ({ text, linkTo, onPress }) => {
+  if (linkTo) {
+    return (
+      <Link to={linkTo} style={styles.tab}>
         <Text fontWeight="bold" fontSize="subheading" color="appBar">
           {text}
         </Text>
       </Link>
+    );
+  }
+
+  return (
+    <Pressable style={styles.tab} onPress={onPress}>
+      <Text fontWeight="bold" fontSize="subheading" color="appBar">
+        {text}
+      </Text>
     </Pressable>
   );
 }
