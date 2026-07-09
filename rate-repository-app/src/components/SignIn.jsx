@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 })
-const SignInForm = ({ onSubmit }) => {
+export const SignInForm = ({ onSubmit }) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
@@ -79,7 +79,7 @@ const SignInForm = ({ onSubmit }) => {
           <Text style={{ color: theme.colors.error }}>{formik.errors.password}</Text>
         )}
       </View>
-      <Pressable onPress={formik.handleSubmit} style={styles.button}>
+      <Pressable testID="sign-in-button" onPress={formik.handleSubmit} style={styles.button}>
         <Text color='textInverted' fontWeight='bold'>
           Sign In
         </Text>
