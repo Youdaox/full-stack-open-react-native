@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { Route, Routes, Navigate, useParams } from 'react-router-native';
 import RepositoryList from './RepositoryList';
-import SingleRepository from './Single';
+import RepositoryView from './RepositoryView';
 
 import AppBar from './AppBar';
 import SignIn from './SignIn';
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
 
 const RepositoryPage = () => {
   let { id } = useParams();
-  return <SingleRepository repositoryId={id} />;
+  return <RepositoryView repositoryId={id} />;
 }
 
 const Main = () => {
