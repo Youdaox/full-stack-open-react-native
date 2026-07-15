@@ -1,4 +1,4 @@
-import { View, Image, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet, Pressable, Linking } from 'react-native';
 import Text from './Text';
 import theme from '../theme';
 
@@ -38,7 +38,7 @@ const formatCount = (count) => {
   return count.toString();
 };
 
-const RepositoryItem = ({ repository }) => {
+const RepositoryItem = ({ repository, url }) => {
   return (
     <View testID="repositoryItem" style={styles.container}>
       <View style={{ flexDirection: 'row', gap: 20, padding: 10 }}>
@@ -74,6 +74,14 @@ const RepositoryItem = ({ repository }) => {
           <Text color='textSecondary'>Rating</Text>
         </View>
       </View>
+
+      {url && (
+        <Pressable onPress={() => Linking.openURL(repository.url)} style={{ backgroundColor: theme.colors.primary, borderRadius: 4, padding: 10, margin: 10 }}>
+          <Text color='textInverted' fontWeight='bold' style={{ textAlign: 'center' }}>
+            Open in GitHub
+          </Text>
+        </Pressable>
+      )}
     </View>
   );
 }

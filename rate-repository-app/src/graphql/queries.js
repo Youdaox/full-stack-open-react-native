@@ -38,3 +38,24 @@ export const CHECK_SIGNED_IN = gql`
     }
   }
 `;
+
+export const GET_REPOSITORY_URL = gql`
+  query Repository($repositoryId: ID!) {
+    repository(id: $repositoryId) {
+      id
+      fullName
+      url
+      name
+      ownerName
+      createdAt
+      fullName
+      reviewCount
+      ratingAverage
+      forksCount
+      stargazersCount
+      description
+      language
+      ownerAvatarUrl
+    }
+  }
+`;
