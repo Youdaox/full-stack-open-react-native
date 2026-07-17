@@ -4,6 +4,8 @@ import useRepositories from '../../hooks/useRepositories';
 import { useNavigate } from "react-router";
 import {Picker} from '@react-native-picker/picker';
 import { useState } from 'react';
+import { Searchbar } from 'react-native-paper';
+import { useDebounce } from "use-debounce";
 
 const styles = StyleSheet.create({
   separator: {
@@ -13,7 +15,7 @@ const styles = StyleSheet.create({
 
 const ItemSeparator = () => <View style={styles.separator} />;
 
-export const RepositoryListContainer = ({ repositories }) => {
+export const RepositoryListContainer = ({ repositories, searchQuery, setSearchQuery, setsortOrder, sortOrder }) => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge) => edge.node)
     : [];
@@ -33,13 +35,22 @@ export const RepositoryListContainer = ({ repositories }) => {
           <RepositoryItem repository={item} />
         </Pressable>
       )}
+      ListHeaderComponent={() => <RepositorySort setsortOrder={setsortOrder} sortOrder={sortOrder} setSearchQuery={setSearchQuery} searchQuery={searchQuery} />}
     />
   );
 };
 
-const RepositorySort = ({ setsortOrder, sortOrder }) => {
+const RepositorySort = ({ setsortOrder, sortOrder, setSearchQuery, searchQuery }) => {
   return (
     <View>
+      <Searchbar
+        placeholder="Search repositories"
+        onChangeText={(text) => {
+          setSearchQuery(text);
+        }}
+        value={searchQuery}
+      />
+
       <Picker
         selectedValue={sortOrder}
         onValueChange={(value) => setsortOrder(value)}
@@ -49,20 +60,23 @@ const RepositorySort = ({ setsortOrder, sortOrder }) => {
         <Picker.Item label="Lowest rated repositories" value="lowest" />
       </Picker>
     </View>
-  )
+  );
 }
 
 const RepositoryList = () => {
-  const [sortOrder, setsortOrder] = useState(null);
+  const [sortOrder, setsortOrder] = useState('');
+  const [searchQuery, setSearchQuery] = useState('')
+  const [debouncedText] = useDebounce(searchQuery, 500);
+
   const repositories = useRepositories(
     sortOrder === 'latest' ? 'CREATED_AT' : 'RATING_AVERAGE',
-    sortOrder === 'lowest' ? 'ASC' : 'DESC'
+    sortOrder === 'lowest' ? 'ASC' : 'DESC',
+    debouncedText
   );
 
   return <>
-    <RepositorySort setsortOrder={setsortOrder} sortOrder={sortOrder} />
-    <RepositoryListContainer repositories={repositories} />
+    <RepositoryListContainer repositories={repositories}  searchQuery={searchQuery} setSearchQuery={setSearchQuery} setsortOrder={setsortOrder} sortOrder={sortOrder}/>
   </>;
 };
-
+  
 export default RepositoryList;
