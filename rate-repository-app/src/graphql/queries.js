@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client';
 
 export const GET_REPOSITORIES = gql`
-  query {
-    repositories {
+  query($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection) {
+    repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
       totalCount
       pageInfo {
         hasPreviousPage
@@ -30,6 +30,7 @@ export const GET_REPOSITORIES = gql`
     }
   }
 `;
+
 export const CHECK_SIGNED_IN = gql`
   query {
     me {
