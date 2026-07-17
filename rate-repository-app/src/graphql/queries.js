@@ -47,6 +47,7 @@ export const CHECK_SIGNED_IN = gql`
               id
               username
             }
+            repositoryId
           }
         }
       }

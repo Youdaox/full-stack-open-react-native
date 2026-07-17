@@ -2,10 +2,10 @@ import { gql } from '@apollo/client';
 
 export const AUTHENTICATE = gql` 
   mutation signIn($credentials: AuthenticateInput) {
-  authenticate(credentials: $credentials) {
-    accessToken
+    authenticate(credentials: $credentials) {
+      accessToken
+    }
   }
-}
 `;
 export const CREATE_REVIEW = gql` 
   mutation createReview($reviewData: CreateReviewInput) {
@@ -26,3 +26,10 @@ export const CREATE_USER = gql`
     }
   }
 `;
+
+export const DELETE_REVIEW = gql` 
+  mutation deleteReview($deleteReviewId: ID!) {
+    deleteReview(id: $deleteReviewId)
+  }
+`;
+
